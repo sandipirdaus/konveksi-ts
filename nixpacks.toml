@@ -2,7 +2,11 @@
 nixpkgs = ["php82", "php82Packages.composer", "nodejs_20"]
 
 [phases.install]
-cmds = ["composer install --no-dev --optimize-autoloader --ignore-platform-reqs"]
+# Perintah sakti: hapus lock lama, lalu install ulang dengan mengabaikan batasan versi
+cmds = [
+    "rm -f composer.lock",
+    "composer install --no-dev --optimize-autoloader --ignore-platform-reqs --no-scripts"
+]
 
 [start]
 cmd = "php artisan serve --host 0.0.0.0 --port $PORT"
