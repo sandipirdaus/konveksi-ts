@@ -1,5 +1,6 @@
 [phases.setup]
-nixpkgs = ["php82", "php82Packages.composer", "nodejs"]
+nixpkgsArchive = "ba155169a531e8471b48b11155996163351ecf7c"
+nixpkgs = ["php82", "php82Packages.composer", "nodejs_20"]
 
 [phases.install]
 cmds = ["composer install --no-dev --optimize-autoloader"]
