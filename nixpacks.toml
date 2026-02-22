@@ -1,11 +1,20 @@
 [phases.setup]
-nixpkgs = ["php82", "php82Packages.composer", "nodejs_20"]
+nixpkgs = ["php82", "php82Packages.composer", "nodejs-16_x"]
 
 [phases.install]
 # Perintah sakti: hapus lock lama, lalu install ulang dengan mengabaikan batasan versi
 cmds = [
-    "rm -f composer.lock",
+    "npm install",
     "composer install --no-dev --optimize-autoloader --ignore-platform-reqs --no-scripts"
+]
+
+[phases.build]
+dependsOn = ["install"]
+cmds = [
+    "npm run production",
+    "php artisan config:cache",
+    "php artisan route:cache",
+    "php artisan view:cache"
 ]
 
 [start]
